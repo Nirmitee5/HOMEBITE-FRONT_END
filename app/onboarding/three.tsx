@@ -1,7 +1,15 @@
-import { useEffect, useRef, useMemo } from "react";
-import { View, Text, Pressable, Animated, Image, Easing, Dimensions } from "react-native";
-import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import { router } from "expo-router";
+import { useEffect, useMemo, useRef } from "react";
+import {
+  Animated,
+  Dimensions,
+  Easing,
+  Image,
+  Pressable,
+  Text,
+  View,
+} from "react-native";
 
 const { width: SCREEN_W } = Dimensions.get("window");
 
@@ -40,8 +48,12 @@ function WindLine({ top, width, delay, duration }: WindLineConfig) {
           duration: duration * 0.2,
           useNativeDriver: true,
         }),
-        Animated.timing(translateX, { toValue: 40, duration: 0, useNativeDriver: true }),
-      ])
+        Animated.timing(translateX, {
+          toValue: 40,
+          duration: 0,
+          useNativeDriver: true,
+        }),
+      ]),
     );
     loop.start();
     return () => loop.stop();
@@ -77,18 +89,50 @@ function DustPuff({ left, delay }: { left: number; delay: number }) {
       Animated.sequence([
         Animated.delay(delay),
         Animated.parallel([
-          Animated.timing(opacity, { toValue: 0.5, duration: 200, useNativeDriver: true }),
-          Animated.timing(scale, { toValue: 1, duration: 500, useNativeDriver: true }),
-          Animated.timing(translateY, { toValue: 8, duration: 500, useNativeDriver: true }),
-          Animated.timing(translateX, { toValue: -18, duration: 500, useNativeDriver: true }),
+          Animated.timing(opacity, {
+            toValue: 0.5,
+            duration: 200,
+            useNativeDriver: true,
+          }),
+          Animated.timing(scale, {
+            toValue: 1,
+            duration: 500,
+            useNativeDriver: true,
+          }),
+          Animated.timing(translateY, {
+            toValue: 8,
+            duration: 500,
+            useNativeDriver: true,
+          }),
+          Animated.timing(translateX, {
+            toValue: -18,
+            duration: 500,
+            useNativeDriver: true,
+          }),
         ]),
-        Animated.timing(opacity, { toValue: 0, duration: 250, useNativeDriver: true }),
+        Animated.timing(opacity, {
+          toValue: 0,
+          duration: 250,
+          useNativeDriver: true,
+        }),
         Animated.parallel([
-          Animated.timing(translateY, { toValue: 0, duration: 0, useNativeDriver: true }),
-          Animated.timing(translateX, { toValue: 0, duration: 0, useNativeDriver: true }),
-          Animated.timing(scale, { toValue: 0.4, duration: 0, useNativeDriver: true }),
+          Animated.timing(translateY, {
+            toValue: 0,
+            duration: 0,
+            useNativeDriver: true,
+          }),
+          Animated.timing(translateX, {
+            toValue: 0,
+            duration: 0,
+            useNativeDriver: true,
+          }),
+          Animated.timing(scale, {
+            toValue: 0.4,
+            duration: 0,
+            useNativeDriver: true,
+          }),
         ]),
-      ])
+      ]),
     );
     loop.start();
     return () => loop.stop();
@@ -131,7 +175,11 @@ export default function OnboardingThree() {
   const fadeBg = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    Animated.timing(fadeBg, { toValue: 1, duration: 700, useNativeDriver: true }).start();
+    Animated.timing(fadeBg, {
+      toValue: 1,
+      duration: 700,
+      useNativeDriver: true,
+    }).start();
 
     Animated.sequence([
       Animated.stagger(140, [
@@ -166,7 +214,11 @@ export default function OnboardingThree() {
       ]),
       // Scooter zooms in from off-screen left, with a little forward-lean tilt that settles
       Animated.parallel([
-        Animated.timing(fadeDriver, { toValue: 1, duration: 250, useNativeDriver: true }),
+        Animated.timing(fadeDriver, {
+          toValue: 1,
+          duration: 250,
+          useNativeDriver: true,
+        }),
         Animated.timing(driveIn, {
           toValue: 0,
           duration: 750,
@@ -174,13 +226,30 @@ export default function OnboardingThree() {
           useNativeDriver: true,
         }),
         Animated.sequence([
-          Animated.timing(tilt, { toValue: 1, duration: 300, useNativeDriver: true }),
-          Animated.spring(tilt, { toValue: 0, friction: 5, tension: 60, useNativeDriver: true }),
+          Animated.timing(tilt, {
+            toValue: 1,
+            duration: 300,
+            useNativeDriver: true,
+          }),
+          Animated.spring(tilt, {
+            toValue: 0,
+            friction: 5,
+            tension: 60,
+            useNativeDriver: true,
+          }),
         ]),
       ]),
       Animated.parallel([
-        Animated.timing(fadeFooter, { toValue: 1, duration: 450, useNativeDriver: true }),
-        Animated.timing(slideFooter, { toValue: 0, duration: 450, useNativeDriver: true }),
+        Animated.timing(fadeFooter, {
+          toValue: 1,
+          duration: 450,
+          useNativeDriver: true,
+        }),
+        Animated.timing(slideFooter, {
+          toValue: 0,
+          duration: 450,
+          useNativeDriver: true,
+        }),
       ]),
     ]).start(() => {
       // idle bounce loop, like riding over a bumpy road
@@ -198,7 +267,7 @@ export default function OnboardingThree() {
             easing: Easing.inOut(Easing.sin),
             useNativeDriver: true,
           }),
-        ])
+        ]),
       ).start();
     });
   }, []);
@@ -216,7 +285,7 @@ export default function OnboardingThree() {
   };
 
   const handleNext = () => {
-    router.push("../auth/login");
+    router.replace("../auth/locationverify");
   };
 
   const windLines = useMemo(
@@ -226,11 +295,17 @@ export default function OnboardingThree() {
       { top: 168, width: 38, delay: 320, duration: 620 },
       { top: 186, width: 24, delay: 480, duration: 680 },
     ],
-    []
+    [],
   );
 
-  const bounceY = bounce.interpolate({ inputRange: [0, 1], outputRange: [0, -6] });
-  const tiltDeg = tilt.interpolate({ inputRange: [0, 1], outputRange: ["0deg", "-4deg"] });
+  const bounceY = bounce.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, -6],
+  });
+  const tiltDeg = tilt.interpolate({
+    inputRange: [0, 1],
+    outputRange: ["0deg", "-4deg"],
+  });
 
   return (
     <View className="flex-1 bg-[#FFF8EF]">
@@ -247,7 +322,12 @@ export default function OnboardingThree() {
         {/* faint road line near the bottom for grounding */}
         <View
           className="absolute left-6 right-6"
-          style={{ bottom: 118, height: 2, backgroundColor: "#E8C9A8", opacity: 0.6 }}
+          style={{
+            bottom: 118,
+            height: 2,
+            backgroundColor: "#E8C9A8",
+            opacity: 0.6,
+          }}
         />
       </Animated.View>
 
@@ -269,7 +349,10 @@ export default function OnboardingThree() {
 
         {/* Heading */}
         <Animated.View
-          style={{ opacity: fadeHeading, transform: [{ translateY: slideHeading }] }}
+          style={{
+            opacity: fadeHeading,
+            transform: [{ translateY: slideHeading }],
+          }}
           className="items-center mt-16"
         >
           <Text
@@ -277,7 +360,10 @@ export default function OnboardingThree() {
             className="text-[42px] text-[#2A2A2A] text-center leading-[48px]"
           >
             Fast Delivery,{"\n"}
-            <Text style={{ fontFamily: "Poppins_800ExtraBold" }} className="text-[#C84A25]">
+            <Text
+              style={{ fontFamily: "Poppins_800ExtraBold" }}
+              className="text-[#C84A25]"
+            >
               Right to You
             </Text>
           </Text>
@@ -285,15 +371,17 @@ export default function OnboardingThree() {
 
         {/* Subtitle */}
         <Animated.View
-          style={{ opacity: fadeSubtitle, transform: [{ translateY: slideSubtitle }] }}
+          style={{
+            opacity: fadeSubtitle,
+            transform: [{ translateY: slideSubtitle }],
+          }}
           className="items-center mt-4"
         >
           <Text
             style={{ fontFamily: "Poppins_400Regular" }}
             className="text-[16px] text-[#8A8A8A] text-center leading-relaxed px-4"
           >
-            Quick, reliable and safe delivery by our trusted delivery
-            partners
+            Quick, reliable and safe delivery by our trusted delivery partners
           </Text>
         </Animated.View>
 
@@ -326,7 +414,10 @@ export default function OnboardingThree() {
 
         {/* Footer: dots + skip */}
         <Animated.View
-          style={{ opacity: fadeFooter, transform: [{ translateY: slideFooter }] }}
+          style={{
+            opacity: fadeFooter,
+            transform: [{ translateY: slideFooter }],
+          }}
           className="flex-row items-center justify-between pb-2"
         >
           <View className="flex-row items-center gap-1.5">
@@ -335,7 +426,10 @@ export default function OnboardingThree() {
             <View className="h-1.5 w-1.5 rounded-full bg-[#E5DFD8]" />
           </View>
 
-          <Pressable onPress={handleNext} className="flex-row items-center gap-1.5 active:opacity-70">
+          <Pressable
+            onPress={handleNext}
+            className="flex-row items-center gap-1.5 active:opacity-70"
+          >
             <Text
               style={{ fontFamily: "Poppins_600SemiBold" }}
               className="text-[#2A2A2A] text-[15px]"

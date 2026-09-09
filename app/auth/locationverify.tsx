@@ -1,16 +1,15 @@
-import { useEffect, useRef, useState } from "react";
-import {
-  View,
-  Text,
-  Pressable,
-  Animated,
-  Easing,
-  Platform,
-  ScrollView,
-} from "react-native";
-import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import * as Location from "expo-location";
+import { router } from "expo-router";
+import { useEffect, useRef, useState } from "react";
+import {
+  Animated,
+  Easing,
+  Pressable,
+  ScrollView,
+  Text,
+  View
+} from "react-native";
 
 export default function LocationVerify() {
   const [loading, setLoading] = useState(false);
@@ -79,7 +78,7 @@ export default function LocationVerify() {
           easing: Easing.inOut(Easing.sin),
           useNativeDriver: true,
         }),
-      ])
+      ]),
     ).start();
 
     // =========================================
@@ -101,7 +100,7 @@ export default function LocationVerify() {
           easing: Easing.inOut(Easing.sin),
           useNativeDriver: true,
         }),
-      ])
+      ]),
     ).start();
   }, []);
 
@@ -132,8 +131,7 @@ export default function LocationVerify() {
       setLoading(true);
 
       // Request foreground location permission
-      const { status } =
-        await Location.requestForegroundPermissionsAsync();
+      const { status } = await Location.requestForegroundPermissionsAsync();
 
       if (status !== "granted") {
         setLoading(false);
@@ -144,10 +142,9 @@ export default function LocationVerify() {
       setLocationGranted(true);
 
       // Get current location
-      const location =
-        await Location.getCurrentPositionAsync({
-          accuracy: Location.Accuracy.Balanced,
-        });
+      const location = await Location.getCurrentPositionAsync({
+        accuracy: Location.Accuracy.Balanced,
+      });
 
       console.log("Latitude:", location.coords.latitude);
       console.log("Longitude:", location.coords.longitude);
@@ -157,7 +154,7 @@ export default function LocationVerify() {
       // =========================================
 
       setTimeout(() => {
-        router.replace("/");
+        router.replace("/auth/role");
       }, 1000);
     } catch (error) {
       console.log("Location error:", error);
@@ -178,7 +175,6 @@ export default function LocationVerify() {
         }}
       >
         <View className="flex-1 px-6 pt-12">
-
           {/* ================================= */}
           {/* DECORATIVE BACKGROUND */}
           {/* ================================= */}
@@ -277,11 +273,7 @@ export default function LocationVerify() {
               elevation: 3,
             }}
           >
-            <Ionicons
-              name="arrow-back"
-              size={24}
-              color="#2A2A2A"
-            />
+            <Ionicons name="arrow-back" size={24} color="#2A2A2A" />
           </Pressable>
 
           {/* ================================= */}
@@ -299,7 +291,6 @@ export default function LocationVerify() {
             }}
             className="items-center"
           >
-
             {/* ================================= */}
             {/* LOCATION ICON */}
             {/* ================================= */}
@@ -367,11 +358,7 @@ export default function LocationVerify() {
                     justifyContent: "center",
                   }}
                 >
-                  <Ionicons
-                    name="location"
-                    size={48}
-                    color="#C84A25"
-                  />
+                  <Ionicons name="location" size={48} color="#C84A25" />
                 </View>
               </Animated.View>
             </View>
@@ -382,8 +369,7 @@ export default function LocationVerify() {
 
             <Text
               style={{
-                fontFamily:
-                  "Poppins_800ExtraBold",
+                fontFamily: "Poppins_800ExtraBold",
               }}
               className="
                 text-[#222222]
@@ -401,8 +387,7 @@ export default function LocationVerify() {
 
             <Text
               style={{
-                fontFamily:
-                  "Poppins_400Regular",
+                fontFamily: "Poppins_400Regular",
               }}
               className="
                 text-[#6F6861]
@@ -446,7 +431,6 @@ export default function LocationVerify() {
                 elevation: 2,
               }}
             >
-
               {/* BENEFIT 1 */}
 
               <View className="flex-row items-center">
@@ -460,18 +444,13 @@ export default function LocationVerify() {
                     justify-center
                   "
                 >
-                  <Ionicons
-                    name="restaurant"
-                    size={21}
-                    color="#6D9E4E"
-                  />
+                  <Ionicons name="restaurant" size={21} color="#6D9E4E" />
                 </View>
 
                 <View className="ml-3 flex-1">
                   <Text
                     style={{
-                      fontFamily:
-                        "Poppins_700Bold",
+                      fontFamily: "Poppins_700Bold",
                     }}
                     className="
                       text-[#3A342F]
@@ -483,8 +462,7 @@ export default function LocationVerify() {
 
                   <Text
                     style={{
-                      fontFamily:
-                        "Poppins_400Regular",
+                      fontFamily: "Poppins_400Regular",
                     }}
                     className="
                       text-[#8A8178]
@@ -499,9 +477,7 @@ export default function LocationVerify() {
 
               {/* DIVIDER */}
 
-              <View
-                className="h-[1px] bg-[#F0E8DE] my-4"
-              />
+              <View className="h-[1px] bg-[#F0E8DE] my-4" />
 
               {/* BENEFIT 2 */}
 
@@ -516,18 +492,13 @@ export default function LocationVerify() {
                     justify-center
                   "
                 >
-                  <Ionicons
-                    name="navigate"
-                    size={21}
-                    color="#C84A25"
-                  />
+                  <Ionicons name="navigate" size={21} color="#C84A25" />
                 </View>
 
                 <View className="ml-3 flex-1">
                   <Text
                     style={{
-                      fontFamily:
-                        "Poppins_700Bold",
+                      fontFamily: "Poppins_700Bold",
                     }}
                     className="
                       text-[#3A342F]
@@ -539,8 +510,7 @@ export default function LocationVerify() {
 
                   <Text
                     style={{
-                      fontFamily:
-                        "Poppins_400Regular",
+                      fontFamily: "Poppins_400Regular",
                     }}
                     className="
                       text-[#8A8178]
@@ -552,7 +522,6 @@ export default function LocationVerify() {
                   </Text>
                 </View>
               </View>
-
             </View>
 
             {/* ================================= */}
@@ -573,16 +542,11 @@ export default function LocationVerify() {
                   border-[#D7E8CC]
                 "
               >
-                <Ionicons
-                  name="checkmark-circle"
-                  size={19}
-                  color="#6D9E4E"
-                />
+                <Ionicons name="checkmark-circle" size={19} color="#6D9E4E" />
 
                 <Text
                   style={{
-                    fontFamily:
-                      "Poppins_600SemiBold",
+                    fontFamily: "Poppins_600SemiBold",
                   }}
                   className="
                     text-[#5E8D43]
@@ -619,17 +583,10 @@ export default function LocationVerify() {
                   items-center
                   justify-center
                   mt-7
-                  ${
-                    locationGranted
-                      ? "bg-[#6D9E4E]"
-                      : "bg-[#C84A25]"
-                  }
+                  ${locationGranted ? "bg-[#6D9E4E]" : "bg-[#C84A25]"}
                 `}
                 style={{
-                  shadowColor:
-                    locationGranted
-                      ? "#6D9E4E"
-                      : "#C84A25",
+                  shadowColor: locationGranted ? "#6D9E4E" : "#C84A25",
                   shadowOpacity: 0.3,
                   shadowRadius: 15,
                   shadowOffset: {
@@ -640,14 +597,13 @@ export default function LocationVerify() {
                 }}
               >
                 <View className="flex-row items-center">
-
                   <Ionicons
                     name={
                       locationGranted
                         ? "checkmark-circle"
                         : loading
-                        ? "locate"
-                        : "location"
+                          ? "locate"
+                          : "location"
                     }
                     size={22}
                     color="#FFFFFF"
@@ -655,8 +611,7 @@ export default function LocationVerify() {
 
                   <Text
                     style={{
-                      fontFamily:
-                        "Poppins_700Bold",
+                      fontFamily: "Poppins_700Bold",
                     }}
                     className="
                       text-white
@@ -667,10 +622,9 @@ export default function LocationVerify() {
                     {locationGranted
                       ? "Location Enabled"
                       : loading
-                      ? "Finding Location..."
-                      : "Allow Location"}
+                        ? "Finding Location..."
+                        : "Allow Location"}
                   </Text>
-
                 </View>
               </Pressable>
             </Animated.View>
@@ -680,7 +634,6 @@ export default function LocationVerify() {
             {/* ================================= */}
 
             <View className="flex-row items-center mt-5 mb-6">
-
               <Ionicons
                 name="shield-checkmark-outline"
                 size={16}
@@ -689,8 +642,7 @@ export default function LocationVerify() {
 
               <Text
                 style={{
-                  fontFamily:
-                    "Poppins_400Regular",
+                  fontFamily: "Poppins_400Regular",
                 }}
                 className="
                   text-[#8A8178]
@@ -698,12 +650,9 @@ export default function LocationVerify() {
                   ml-1.5
                 "
               >
-                Your location is only used to improve
-                delivery
+                Your location is only used to improve delivery
               </Text>
-
             </View>
-
           </Animated.View>
         </View>
       </ScrollView>
