@@ -144,6 +144,7 @@ export default function CustomerSignup() {
     */
 
     console.log("Customer signup validation successful");
+      router.replace("/(tabs)");
 
     // Backend/API connection will be added here later.
   };
